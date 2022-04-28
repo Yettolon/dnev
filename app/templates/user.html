@@ -1,0 +1,33 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+    
+{% block content %}
+    <a href="{{url_for('auth.logout')}}">Logout</a>
+
+    {{ current_user.username }}
+    <a id="new" href="{{url_for('main.new_record')}}">New record</a>
+
+    <div>
+        
+        {% for r in rec %}
+        <p><a id="edit" href="{{ url_for('main.record_edit', username=current_user.username, id=r.id) }}">Date: {{r.data_pub}}. Title:{{r.title}} </a></p>
+        {% endfor %}
+    </div>
+
+
+    {% if pagination.has_prev %}
+    <li>
+        <a id="notnext" href="{{ url_for('main.user', username=current_user.username, page=pagination.prev_num) }}">Previous</a>
+    </li>
+    {% endif %}
+
+    {% if pagination.has_next %}
+    <li>
+        <a id="nexts" href="{{ url_for('main.user', username=current_user.username, page=pagination.next_num) }}">Next</a>
+    </li>
+    {% endif %}
+{% endblock content %}
+    

@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+{% block title %}Register{% endblock title %}
+{% block content %}
+<h4><a href="{{url_for('main.index')}}">Home</a></h4>
+<form action="" method="post">
+
+        <div>
+        {{ form.csrf_token }}
+        </div>
+        {% for field in form if field.name != 'csrf_token' %}
+        <div>
+            {% if field != form.submit %}
+            <p>{{field.label}}:</p>
+            {% endif %}
+            {{field()}}
+
+        </div>
+        {% endfor %}
+            
+    
+</form>
+{% endblock content %}
